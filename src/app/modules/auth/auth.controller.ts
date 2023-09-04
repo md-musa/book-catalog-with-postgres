@@ -14,7 +14,7 @@ const signup = catchAsync(
     const userData: User = req.body;
     //accessToken, refreshToken,
 
-    const user = await AuthService.signup(userData);
+    const result = await AuthService.signup(userData);
 
     // res.cookie('refreshToken', refreshToken);
 
@@ -22,8 +22,7 @@ const signup = catchAsync(
       statusCode: httpStatus.CREATED,
       success: true,
       message: 'User created successfully',
-      // accessToken,
-      data: user,
+      data: result,
     });
   }
 );
@@ -31,13 +30,13 @@ const signup = catchAsync(
 const login = catchAsync(async (req: Request, res: Response): Promise<void> => {
   const userData: User = req.body;
 
-  const user = await AuthService.login(userData);
+  const result = await AuthService.login(userData);
 
   sendResponse<User>(res, {
     statusCode: httpStatus.CREATED,
     success: true,
     message: 'User logged in successfully',
-    data: user,
+    data: result,
   });
 });
 

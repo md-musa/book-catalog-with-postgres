@@ -1,8 +1,10 @@
 import { User as IUser, PrismaClient } from '@prisma/client';
 import bcrypt from 'bcrypt';
 import httpStatus from 'http-status';
+import { Secret } from 'jsonwebtoken';
 import config from '../../../config';
 import ApiError from '../../../errors/ApiError';
+import { jwtHelpers } from '../../../helpers/jwtHelpers';
 
 const prisma = new PrismaClient();
 
@@ -20,14 +22,24 @@ const signup = async (userData: IUser): Promise<IUser> => {
 
   userData.password = await bcrypt.hash(
     password,
-    Number(config.bcrypt_salt_rounds)
+    Number(config.BCRYPT_SALT_ROUNDS)
   );
 
   user = await prisma.user.create({
     data: userData,
   });
 
-  return user;
+  const accessToken = jwtHelpers.createToken(
+    {
+      role: user.role,
+      email: user.email,
+      name: user.name,
+    },
+    config.JWT.ACCESS_TOKEN_SECRET as Secret,
+    config.JWT.ACCESS_TOKEN_EXPIRES_IN as string
+  );
+
+  return { accessToken, user };
 };
 
 const login = async (userData: IUser): Promise<IUser> => {
@@ -46,7 +58,17 @@ const login = async (userData: IUser): Promise<IUser> => {
   if (!isPasswordMatched)
     throw new ApiError(httpStatus.UNAUTHORIZED, 'Invalid password');
 
-  return user;
+  const accessToken = jwtHelpers.createToken(
+    {
+      role: user.role,
+      email: user.email,
+      name: user.name,
+    },
+    config.JWT.ACCESS_TOKEN_SECRET as Secret,
+    config.JWT.ACCESS_TOKEN_EXPIRES_IN as string
+  );
+
+  return { accessToken, user };
 };
 
 export const AuthService = {
