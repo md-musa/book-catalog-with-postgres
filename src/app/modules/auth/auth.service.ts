@@ -1,4 +1,4 @@
-import { User as IUser, PrismaClient } from '@prisma/client';
+import { User as IUser, PrismaClient, User } from '@prisma/client';
 import bcrypt from 'bcrypt';
 import httpStatus from 'http-status';
 import { Secret } from 'jsonwebtoken';
@@ -8,7 +8,9 @@ import { jwtHelpers } from '../../../helpers/jwtHelpers';
 
 const prisma = new PrismaClient();
 
-const signup = async (userData: IUser): Promise<IUser> => {
+const signup = async (
+  userData: IUser
+): Promise<{ accessToken: Secret; user: User }> => {
   console.log(userData);
   const { email, password } = userData;
 
@@ -42,7 +44,9 @@ const signup = async (userData: IUser): Promise<IUser> => {
   return { accessToken, user };
 };
 
-const login = async (userData: IUser): Promise<IUser> => {
+const login = async (
+  userData: IUser
+): Promise<{ accessToken: Secret; user: User }> => {
   console.log(userData);
   const { email, password } = userData;
 
