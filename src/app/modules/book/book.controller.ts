@@ -35,7 +35,22 @@ const getBooks = catchAsync(async (req: Request, res: Response) => {
   const filters = pick(req.query, ['search', 'minPrice', 'maxPrice', 'category']);
   const options = pick(req.query, ['page', 'size', 'sortBy', 'sortOrder']);
 
-  const result = await BookService.getBooks();
+  const result = await BookService.getBooks(filters, options);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Books retrieve successfully',
+    meta: result.meta,
+    data: result.data,
+  });
+});
+
+const getBooksByCategoryId = catchAsync(async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const options = pick(req.query, ['page', 'size', 'sortBy', 'sortOrder']);
+
+  const result = await BookService.getBooksByCategoryId(id, options);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -55,7 +70,7 @@ const updateBook = catchAsync(async (req: Request, res: Response) => {
   sendResponse(res, {
     statusCode: httpStatus.CREATED,
     success: true,
-    message: 'Book retrieve successfully',
+    message: 'Book updated successfully',
     data: updatedBook,
   });
 });
@@ -78,5 +93,6 @@ export const BookController = {
   getSingleBook,
   updateBook,
   deleteBook,
+  getBooksByCategoryId,
   getBooks,
 };

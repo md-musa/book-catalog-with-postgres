@@ -6,6 +6,7 @@ import { BookController } from './book.controller';
 const router = express.Router();
 
 router.get('/', BookController.getBooks);
+router.get('/:categoryId', BookController.getBooksByCategoryId);
 router.get('/:id', BookController.getSingleBook);
 router.patch('/:id', auth(USER_ROLE.ADMIN), BookController.updateBook);
 router.delete('/:id', auth(USER_ROLE.ADMIN), BookController.deleteBook);
