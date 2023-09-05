@@ -17,11 +17,11 @@ const auth =
       // verify token
       let verifiedUser = null;
 
-      verifiedUser = jwtHelpers.verifyToken(token, config.jwt.secret as Secret);
+      verifiedUser = jwtHelpers.verifyToken(token, config.JWT.ACCESS_TOKEN_SECRET as Secret);
 
       req.user = verifiedUser; // role  , userid
 
-      // role diye guard korar jnno
+      // Role authentication
       if (requiredRoles.length && !requiredRoles.includes(verifiedUser.role)) {
         throw new ApiError(httpStatus.FORBIDDEN, 'Forbidden');
       }
