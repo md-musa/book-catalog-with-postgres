@@ -9,23 +9,21 @@ import { AuthService } from './auth.service';
 // 1. Do not send password
 // 2. Send jwt
 
-const signup = catchAsync(
-  async (req: Request, res: Response): Promise<void> => {
-    const userData: User = req.body;
-    //accessToken, refreshToken,
+const signup = catchAsync(async (req: Request, res: Response): Promise<void> => {
+  const userData: User = req.body;
+  //accessToken, refreshToken,
 
-    const result = await AuthService.signup(userData);
+  const result = await AuthService.signup(userData);
 
-    // res.cookie('refreshToken', refreshToken);
+  // res.cookie('refreshToken', refreshToken);
 
-    sendResponse<User>(res, {
-      statusCode: httpStatus.CREATED,
-      success: true,
-      message: 'User created successfully',
-      data: result,
-    });
-  }
-);
+  sendResponse(res, {
+    statusCode: httpStatus.CREATED,
+    success: true,
+    message: 'User created successfully',
+    data: result,
+  });
+});
 
 const login = catchAsync(async (req: Request, res: Response): Promise<void> => {
   const userData: User = req.body;

@@ -1,0 +1,7 @@
+=> CUSTOMER
+email: customer.musa@gmail.com
+password: 123456
+
+=> ADMIN
+email: admin.musa@gmail.com
+password: 123456

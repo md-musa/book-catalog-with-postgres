@@ -19,7 +19,7 @@ model User {
   role            Role              @default(CUSTOMER)
   contactNo       String
   address         String
-  profileImage    String?
+  profileImg      String?
   reviewAndRating ReviewAndRating[]
   orders          Order[]
 
