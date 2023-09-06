@@ -1,6 +1,5 @@
-import { PrismaClient, User } from '@prisma/client';
-
-const prisma = new PrismaClient();
+import { User } from '@prisma/client';
+import prisma from '../../../shared/prisma';
 
 const getAllUsers = async (): Promise<Partial<User>[]> => {
   const users = await prisma.user.findMany({});
@@ -18,18 +17,12 @@ const getSingleUser = async (id: string): Promise<User | null> => {
   return user;
 };
 
-const updateUser = async (id: string, data: User): Promise<User | null> => {
-  const updatableData: Partial<User> = {};
-
-  Object.keys(data).forEach((key: string) => {
-    if (data[key].length) updatableData[key] = data[key];
-  });
-
+const updateUser = async (id: string, payload: Partial<User>): Promise<User | null> => {
   const updatedUserData = await prisma.user.update({
     where: {
       id,
     },
-    data: updatableData,
+    data: payload,
   });
 
   return updatedUserData;

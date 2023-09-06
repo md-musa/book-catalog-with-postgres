@@ -44,6 +44,11 @@
             "date": 1693940444482,
             "name": "D:\\Programming\\NLWD\\Assignments\\assignment-8\\logs\\winston\\successes\\phu-2023-06-09-01-success.log",
             "hash": "2de2d4a5293070497b7cb3fd80d966c30d25c04510bd22793116d11fd340e6fb"
+        },
+        {
+            "date": 1693970265701,
+            "name": "D:\\Programming\\NLWD\\Assignments\\assignment-8\\logs\\winston\\successes\\phu-2023-06-09-09-success.log",
+            "hash": "47fc472dbd8a0181a8b7c3b8cb044c1b3d6a4d6f1948bcb76b467fab0715b7a9"
         }
     ],
     "hashType": "sha256"

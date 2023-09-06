@@ -20,9 +20,9 @@ const getAllCategory = catchAsync(async (req: Request, res: Response): Promise<v
   const categories = await CategoryService.getAllCategory();
 
   sendResponse(res, {
-    statusCode: httpStatus.CREATED,
+    statusCode: httpStatus.OK,
     success: true,
-    message: 'Category created successfully',
+    message: 'All categories retrieve successfully',
     data: categories,
   });
 });
@@ -32,9 +32,9 @@ const getSingleCategory = catchAsync(async (req: Request, res: Response): Promis
   const category = await CategoryService.getSingleCategory(id);
 
   sendResponse(res, {
-    statusCode: httpStatus.CREATED,
+    statusCode: httpStatus.OK,
     success: true,
-    message: 'Category created successfully',
+    message: 'Category retrieve successfully',
     data: category,
   });
 });
@@ -45,9 +45,9 @@ const updateCategory = catchAsync(async (req: Request, res: Response): Promise<v
   const updatedCategory = await CategoryService.updateCategory(id, title);
 
   sendResponse(res, {
-    statusCode: httpStatus.CREATED,
+    statusCode: httpStatus.OK,
     success: true,
-    message: 'Category created successfully',
+    message: 'Category updated successfully',
     data: updatedCategory,
   });
 });
@@ -58,9 +58,9 @@ const deleteCategory = catchAsync(async (req: Request, res: Response): Promise<v
   const updatedCategory = await CategoryService.deleteCategory(id);
 
   sendResponse(res, {
-    statusCode: httpStatus.CREATED,
+    statusCode: httpStatus.OK,
     success: true,
-    message: 'Category created successfully',
+    message: 'Category deleted successfully',
     data: updatedCategory,
   });
 });
