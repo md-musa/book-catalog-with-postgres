@@ -47,9 +47,8 @@ const login = async (userData: IUser): Promise<{ accessToken: Secret; user: User
 
   const accessToken = jwtHelpers.createToken(
     {
+      userId: user.id,
       role: user.role,
-      email: user.email,
-      name: user.name,
     },
     config.JWT.ACCESS_TOKEN_SECRET as Secret,
     config.JWT.ACCESS_TOKEN_EXPIRES_IN as string

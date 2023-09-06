@@ -5,9 +5,13 @@ import { IPaginationOptions } from '../../../interfaces/pagination';
 import prisma from '../../../shared/prisma';
 import { BookSearchableFields } from './book.constants';
 
-const createBook = async (bookData: Book): Promise<Book> => {
+const createBook = async (payload: Book): Promise<Book> => {
+  console.log(payload);
   const book = await prisma.book.create({
-    data: bookData,
+    data: payload,
+    include: {
+      category: true,
+    },
   });
 
   return book;
@@ -15,7 +19,7 @@ const createBook = async (bookData: Book): Promise<Book> => {
 
 const getBooks = async (filters: IFilters, options: IPaginationOptions): Promise<IGenericResponse<Book[]>> => {
   const { page, size, skip } = paginationHelpers.calculatePagination(options);
-  const { search, ...filterableData } = filters;
+  const { search, maxPrice, minPrice, category } = filters; // search, maxPrice, minPrice, category
 
   const andConditions: any[] = [];
 
@@ -23,20 +27,20 @@ const getBooks = async (filters: IFilters, options: IPaginationOptions): Promise
     andConditions.push({
       OR: BookSearchableFields.map(field => ({
         [field]: {
-          contain: search,
+          contains: search,
           mode: 'insensitive',
         },
       })),
     });
   }
 
-  if (Object.keys(filterableData).length > 0) {
+  if (category) {
     andConditions.push({
-      AND: Object.keys(filterableData).map(field => ({
-        [field]: {
-          equal: (filterableData as any)[field],
+      AND: {
+        categoryId: {
+          equals: category,
         },
-      })),
+      },
     });
   }
 
@@ -46,6 +50,7 @@ const getBooks = async (filters: IFilters, options: IPaginationOptions): Promise
     where: whereConditions,
     skip,
     take: size,
+
     orderBy:
       options.sortBy && options.sortOrder
         ? {
@@ -60,7 +65,7 @@ const getBooks = async (filters: IFilters, options: IPaginationOptions): Promise
       page,
       size,
       total,
-      totalPage: Number(total / size),
+      totalPage: Math.ceil(total / size),
     },
     data: books,
   };
@@ -75,11 +80,12 @@ const getSingleBook = async (id: string): Promise<Book | null> => {
 };
 
 const getBooksByCategoryId = async (categoryId: string, options: IPaginationOptions): Promise<IGenericResponse<Book[]>> => {
+  console.log(categoryId);
   const { page, size, skip } = paginationHelpers.calculatePagination(options);
 
   const books = await prisma.book.findMany({
     where: {
-      id: categoryId,
+      categoryId,
     },
     skip,
     take: size,
@@ -97,22 +103,16 @@ const getBooksByCategoryId = async (categoryId: string, options: IPaginationOpti
       page,
       size,
       total: total.length,
-      totalPage: Number(total.length / size),
+      totalPage: Math.floor(total.length / size),
     },
     data: books,
   };
 };
 
-const updateBook = async (id: string, bookData: Partial<Book>): Promise<Book> => {
-  const updatableData: Partial<Book> = {};
-
-  Object.keys(bookData).forEach((key: string) => {
-    if ((bookData as string)[key as any].length) updatableData[key as string] = bookData[key as string];
-  });
-
+const updateBook = async (id: string, payload: Partial<Book>): Promise<Book> => {
   const updatedBook = await prisma.book.update({
     where: { id },
-    data: updatableData,
+    data: payload,
   });
 
   return updatedBook;
