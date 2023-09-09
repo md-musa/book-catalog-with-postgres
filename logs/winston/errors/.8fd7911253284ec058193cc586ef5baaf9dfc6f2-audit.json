@@ -89,6 +89,11 @@
             "date": 1694008875654,
             "name": "D:\\Programming\\NLWD\\Assignments\\assignment-8\\logs\\winston\\errors\\phu-2023-06-09-20-error.log",
             "hash": "0567cbc9aa683958a5401a74130274cbf73fd9f5af0ca81d0a5a29a4fb31dda1"
+        },
+        {
+            "date": 1694272479913,
+            "name": "D:\\Programming\\NLWD\\Assignments\\assignment-8\\logs\\winston\\errors\\phu-2023-09-09-21-error.log",
+            "hash": "4a43e77353cd3b198adc95ab9dbe6c8e35986bd5c59d2dff57fc56d2a7faf89b"
         }
     ],
     "hashType": "sha256"

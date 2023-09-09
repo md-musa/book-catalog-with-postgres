@@ -18,9 +18,9 @@ const signup = catchAsync(async (req: Request, res: Response): Promise<void> => 
   // res.cookie('refreshToken', refreshToken);
 
   sendResponse(res, {
-    statusCode: httpStatus.CREATED,
+    statusCode: httpStatus.OK,
     success: true,
-    message: 'User created successfully',
+    message: 'User created successfully!',
     data: result,
   });
 });
@@ -28,14 +28,16 @@ const signup = catchAsync(async (req: Request, res: Response): Promise<void> => 
 const login = catchAsync(async (req: Request, res: Response): Promise<void> => {
   const userData: User = req.body;
 
-  const result = await AuthService.login(userData);
+  const token = await AuthService.login(userData);
 
-  sendResponse(res, {
-    statusCode: httpStatus.CREATED,
+  const response = {
     success: true,
-    message: 'User logged in successfully',
-    data: result,
-  });
+    statusCode: 200,
+    message: 'User signin successfully!',
+    token: token,
+  };
+
+  res.status(200).json(response);
 });
 
 export const AuthController = {

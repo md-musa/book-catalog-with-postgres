@@ -6,6 +6,6 @@ import { AuthValidation } from './auth.validation';
 const router = express.Router();
 
 router.post('/signup', validateRequest(AuthValidation.create), AuthController.signup);
-router.post('/sign-in', AuthController.login);
+router.post('/signin', AuthController.login);
 
 export const AuthRoutes = router;

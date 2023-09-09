@@ -6,20 +6,22 @@ const create = z.object({
       name: z.string({
         required_error: 'Name is required',
       }),
-      email: z.string({
-        required_error: 'Email is required',
-      }),
+      email: z
+        .string({
+          required_error: 'Email is required',
+        })
+        .email(),
       password: z.string({
         required_error: 'Password is required',
       }),
-      role: z.enum(['CUSTOMER', 'ADMIN']).optional(),
+      role: z.enum(['customer', 'admin']).default('customer'),
       contactNo: z.string({
         required_error: 'contact number is required',
       }),
       address: z.string({
         required_error: 'address is required',
       }),
-      profileImg: z.string().optional(),
+      profileImg: z.string(),
     })
     .strict(),
 });
