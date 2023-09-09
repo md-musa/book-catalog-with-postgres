@@ -16,30 +16,25 @@ model User {
   name            String
   email           String            @unique
   password        String
-  role            Role              @default(CUSTOMER)
+  role            Role              @default(customer)
   contactNo       String
   address         String
-  profileImg      String?
+  profileImg      String
   reviewAndRating ReviewAndRating[]
   orders          Order[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 
   @@map("users")
 }
 
 enum Role {
-  ADMIN
-  CUSTOMER
+  admin
+  customer
 }
 
 model Category {
-  id        String   @id @default(uuid())
-  title     String
-  books     Book[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id    String @id @default(uuid())
+  title String
+  books Book[]
 
   @@map("categories")
 }
@@ -57,9 +52,6 @@ model Book {
 
   reviewAndRating ReviewAndRating[]
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
   @@map("books")
 }
 
@@ -74,10 +66,12 @@ model ReviewAndRating {
   bookId String @unique
   book   Book   @relation(fields: [bookId], references: [id])
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  @@map("reviews_and_ratings")
+}
 
-  @@map("reviewsAndRatings")
+enum Status {
+  pending
+  shipped
 }
 
 model Order {
@@ -87,9 +81,8 @@ model Order {
   user   User   @relation(fields: [userId], references: [id])
 
   orderedBooks Json[]
-  status       String   @default("pending")
+  status       Status   @default(pending)
   createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
 
   @@map("orders")
 }

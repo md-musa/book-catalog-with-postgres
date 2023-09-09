@@ -30,7 +30,7 @@ const login = catchAsync(async (req: Request, res: Response): Promise<void> => {
 
   const result = await AuthService.login(userData);
 
-  sendResponse<User>(res, {
+  sendResponse(res, {
     statusCode: httpStatus.CREATED,
     success: true,
     message: 'User logged in successfully',

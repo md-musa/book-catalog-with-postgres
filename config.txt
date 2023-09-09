@@ -5,3 +5,6 @@ password: 123456
 => ADMIN
 email: admin.musa@gmail.com
 password: 123456
+
+=> Deployment
+https://fb.watch/mUhYYR7Xy5/

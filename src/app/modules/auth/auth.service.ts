@@ -7,7 +7,12 @@ import ApiError from '../../../errors/ApiError';
 import { jwtHelpers } from '../../../helpers/jwtHelpers';
 import prisma from '../../../shared/prisma';
 
-const signup = async (payload: IUser): Promise<{ accessToken: Secret; user: User }> => {
+type ISignupReturn = {
+  user: User;
+  accessToken: Secret;
+};
+
+const signup = async (payload: IUser): Promise<ISignupReturn> => {
   const { email, password } = payload;
 
   let user = await prisma.user.findUnique({ where: { email } });
@@ -30,7 +35,7 @@ const signup = async (payload: IUser): Promise<{ accessToken: Secret; user: User
   return { accessToken, user };
 };
 
-const login = async (userData: IUser): Promise<{ accessToken: Secret; user: User }> => {
+const login = async (userData: IUser): Promise<ISignupReturn> => {
   console.log(userData);
   const { email, password } = userData;
 

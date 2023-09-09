@@ -13,7 +13,7 @@ const getAllOrders = async (): Promise<Order[]> => {
   return orders;
 };
 
-const getSpecificCustomerOrder = async (orderId: string): Promise<Order> => {
+const getSpecificCustomerOrder = async (orderId: string): Promise<Order | null> => {
   const order = await prisma.order.findFirst({
     where: { id: orderId },
   });

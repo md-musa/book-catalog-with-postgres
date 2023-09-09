@@ -38,9 +38,20 @@ const deleteUser = async (id: string): Promise<User> => {
   return deletedUser;
 };
 
+const getProfile = async (id: string): Promise<User | null> => {
+  const user = await prisma.user.findUnique({
+    where: {
+      id,
+    },
+  });
+
+  return user;
+};
+
 export const UserService = {
   getAllUsers,
   getSingleUser,
   updateUser,
   deleteUser,
+  getProfile,
 };

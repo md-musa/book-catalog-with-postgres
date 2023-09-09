@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import httpStatus from 'http-status';
+import ApiError from '../../../errors/ApiError';
 import catchAsync from '../../../shared/catchAsync';
 import sendResponse from '../../../shared/sendResponse';
 import { UserService } from './user.service';
@@ -52,9 +53,27 @@ const deleteUser = catchAsync(async (req: Request, res: Response): Promise<void>
   });
 });
 
+const getProfile = catchAsync(async (req: Request, res: Response): Promise<void> => {
+  console.log('USER PROFILE', req.user);
+  const user = await UserService.getProfile(req.user.userId);
+
+  if (!user) throw new ApiError(httpStatus.NOT_FOUND, 'Not found');
+  if (user.id != req.user.userId) {
+    throw new ApiError(httpStatus.UNAUTHORIZED, 'You are not authorized');
+  }
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'User profile fetched successful',
+    data: user,
+  });
+});
+
 export const UserController = {
   getAllUsers,
   getSingleUser,
   updateUser,
   deleteUser,
+  getProfile,
 };

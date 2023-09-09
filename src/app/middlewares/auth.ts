@@ -19,6 +19,8 @@ const auth =
       verifiedUser = jwtHelpers.verifyToken(token, config.JWT.ACCESS_TOKEN_SECRET as Secret);
 
       req.user = verifiedUser;
+      console.log('--------------');
+      console.log(requiredRoles);
       console.log(verifiedUser);
 
       // Role authentication
