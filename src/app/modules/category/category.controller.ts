@@ -9,7 +9,7 @@ const createCategory = catchAsync(async (req: Request, res: Response): Promise<v
   const category = await CategoryService.createCategory(title);
 
   sendResponse(res, {
-    statusCode: httpStatus.CREATED,
+    statusCode: httpStatus.OK,
     success: true,
     message: 'Category created successfully',
     data: category,
@@ -22,7 +22,7 @@ const getAllCategory = catchAsync(async (req: Request, res: Response): Promise<v
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'All categories retrieve successfully',
+    message: 'Categories fetched successfully',
     data: categories,
   });
 });

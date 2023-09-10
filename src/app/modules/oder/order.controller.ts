@@ -9,46 +9,53 @@ import { OrderService } from './order.service';
 
 const createOrder = catchAsync(async (req: Request, res: Response) => {
   const data: Order = req.body;
-  const order = await OrderService.createOrder(data);
+  data.userId = req.user.userId;
+  const result = await OrderService.createOrder(data);
 
   sendResponse(res, {
-    statusCode: httpStatus.CREATED,
+    statusCode: httpStatus.OK,
     success: true,
-    message: 'Order placed successfully',
+    message: 'Order created successfully',
+    data: result,
+  });
+});
+
+const getSingleOrderById = catchAsync(async (req: Request, res: Response) => {
+  const { orderId } = req.params;
+  const order = await OrderService.getSingleOrderById(orderId);
+
+  const { role, userId } = req.user;
+  if (role === USER_ROLE.CUSTOMER && order?.userId != userId) {
+    throw new ApiError(httpStatus.UNAUTHORIZED, 'You are not authorized');
+  }
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Order fetched successfully',
     data: order,
   });
 });
 
 const getAllOrders = catchAsync(async (req: Request, res: Response) => {
-  const orders = await OrderService.getAllOrders();
+  const user = req.user;
+  let orders;
+
+  if (user.role === USER_ROLE.ADMIN) {
+    orders = await OrderService.getAllOrders();
+  } else {
+    orders = await OrderService.getSpecificCustomerOrder(user.userId);
+  }
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'All orders retrieve successfully',
+    message: 'Customer orders retrieve successfully',
     data: orders,
   });
-});
-
-const getSpecificCustomerOrder = catchAsync(async (req: Request, res: Response) => {
-  const { orderId } = req.params;
-  const user = req.user;
-  const order = await OrderService.getSpecificCustomerOrder(orderId);
-
-  if (user.role === USER_ROLE.ADMIN || user.userId == order.userId) {
-    sendResponse(res, {
-      statusCode: httpStatus.OK,
-      success: true,
-      message: 'Customer orders retrieve successfully',
-      data: order,
-    });
-  } else {
-    throw new ApiError(httpStatus.UNAUTHORIZED, 'You are no authorized');
-  }
 });
 
 export const OrderController = {
   createOrder,
   getAllOrders,
-  getSpecificCustomerOrder,
+  getSingleOrderById,
 };

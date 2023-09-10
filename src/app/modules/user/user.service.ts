@@ -1,7 +1,7 @@
 import { User } from '@prisma/client';
 import prisma from '../../../shared/prisma';
 
-const getAllUsers = async (): Promise<Partial<User>[]> => {
+const getAllUsers = async (): Promise<User[]> => {
   const users = await prisma.user.findMany({});
 
   return users;

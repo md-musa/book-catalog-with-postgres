@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import httpStatus from 'http-status';
+import { JwtPayload } from 'jsonwebtoken';
 import ApiError from '../../../errors/ApiError';
 import catchAsync from '../../../shared/catchAsync';
 import sendResponse from '../../../shared/sendResponse';
@@ -11,7 +12,7 @@ const getAllUsers = catchAsync(async (req: Request, res: Response): Promise<void
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Users retrieve successfully',
+    message: 'Users retrieved successfully',
     data: users,
   });
 });
@@ -23,7 +24,7 @@ const getSingleUser = catchAsync(async (req: Request, res: Response): Promise<vo
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'User retrieve successfully',
+    message: 'User getched successfully',
     data: user,
   });
 });
@@ -36,7 +37,7 @@ const updateUser = catchAsync(async (req: Request, res: Response): Promise<void>
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'User data updated successfully',
+    message: 'User updated successfully',
     data: updatedUserData,
   });
 });
@@ -54,13 +55,19 @@ const deleteUser = catchAsync(async (req: Request, res: Response): Promise<void>
 });
 
 const getProfile = catchAsync(async (req: Request, res: Response): Promise<void> => {
-  console.log('USER PROFILE', req.user);
-  const user = await UserService.getProfile(req.user.userId);
+  const { userId } = req.user as JwtPayload;
 
-  if (!user) throw new ApiError(httpStatus.NOT_FOUND, 'Not found');
-  if (user.id != req.user.userId) {
+  const user = await UserService.getProfile(userId);
+
+  if (userId != user?.id) {
     throw new ApiError(httpStatus.UNAUTHORIZED, 'You are not authorized');
   }
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Order fetched successfully',
+    data: user,
+  });
 
   sendResponse(res, {
     statusCode: httpStatus.OK,

@@ -7,8 +7,8 @@ import { OrderValidation } from './order.validation';
 
 const router = express.Router();
 
-router.post('/create-order', validateRequest(OrderValidation.create), OrderController.createOrder);
-router.get('/', auth(USER_ROLE.ADMIN), OrderController.getAllOrders);
-router.get('/:orderId', auth(USER_ROLE.ADMIN, USER_ROLE.CUSTOMER), OrderController.getSpecificCustomerOrder);
+router.get('/', auth(USER_ROLE.ADMIN, USER_ROLE.CUSTOMER), OrderController.getAllOrders);
+router.get('/:orderId', auth(USER_ROLE.ADMIN, USER_ROLE.CUSTOMER), OrderController.getSingleOrderById);
+router.post('/create-order', auth(USER_ROLE.CUSTOMER), validateRequest(OrderValidation.create), OrderController.createOrder);
 
 export const OrderRoute = router;

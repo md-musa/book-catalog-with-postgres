@@ -11,9 +11,9 @@ const createBook = catchAsync(async (req: Request, res: Response) => {
   const book = await BookService.createBook(bookData);
 
   sendResponse(res, {
-    statusCode: httpStatus.CREATED,
+    statusCode: httpStatus.OK,
     success: true,
-    message: 'Book has been created successfully',
+    message: 'Book created successfully',
     data: book,
   });
 });
@@ -26,7 +26,7 @@ const getSingleBook = catchAsync(async (req: Request, res: Response) => {
   sendResponse(res, {
     statusCode: httpStatus.CREATED,
     success: true,
-    message: 'Book retrieve successfully',
+    message: 'Book fetched successfully',
     data: book,
   });
 });
@@ -55,7 +55,7 @@ const getBooksByCategoryId = catchAsync(async (req: Request, res: Response) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Books retrieve successfully',
+    message: 'Books with associated category data fetched successfully',
     meta: result.meta,
     data: result.data,
   });

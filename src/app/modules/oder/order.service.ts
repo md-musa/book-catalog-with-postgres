@@ -1,8 +1,8 @@
 import { Order } from '@prisma/client';
 import prisma from '../../../shared/prisma';
 
-const createOrder = async (data: Order): Promise<Order> => {
-  const order = await prisma.order.create({ data });
+const createOrder = async (payload: Order): Promise<Order> => {
+  const order = await prisma.order.create({ data: payload });
 
   return order;
 };
@@ -13,9 +13,19 @@ const getAllOrders = async (): Promise<Order[]> => {
   return orders;
 };
 
-const getSpecificCustomerOrder = async (orderId: string): Promise<Order | null> => {
-  const order = await prisma.order.findFirst({
-    where: { id: orderId },
+const getSpecificCustomerOrder = async (userId: string): Promise<Order[]> => {
+  const orders = await prisma.order.findMany({
+    where: { userId },
+  });
+
+  return orders;
+};
+
+const getSingleOrderById = async (id: string): Promise<Order | null> => {
+  const order = await prisma.order.findUnique({
+    where: {
+      id,
+    },
   });
 
   return order;
@@ -25,4 +35,5 @@ export const OrderService = {
   createOrder,
   getAllOrders,
   getSpecificCustomerOrder,
+  getSingleOrderById,
 };

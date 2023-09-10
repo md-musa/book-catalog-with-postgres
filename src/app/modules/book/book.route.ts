@@ -8,7 +8,7 @@ import { BookValidation } from './book.validation';
 const router = express.Router();
 
 router.get('/', BookController.getBooks);
-// router.get('/:categoryId', BookController.getBooksByCategoryId);
+router.get('/:categoryId/category', BookController.getBooksByCategoryId);
 router.get('/:id', BookController.getSingleBook);
 router.patch('/:id', auth(USER_ROLE.ADMIN), validateRequest(BookValidation.update), BookController.updateBook);
 router.delete('/:id', auth(USER_ROLE.ADMIN), BookController.deleteBook);
