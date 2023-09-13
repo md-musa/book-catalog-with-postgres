@@ -22,6 +22,10 @@ github
 pass: SJXw&Hx78Y%UN_p
 
 
+===============================
+ISSUES
+1. Use transaction when updating, patching, deleting data
+
 ======> USER
 CUSTOMER----------------
 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI4MjYxYzViZS1mM2Y4LTRjMjItOTA3Yi04ZGI4ZTQ3NjdhYTgiLCJyb2xlIjoiY3VzdG9tZXIiLCJpYXQiOjE2OTQ2MDYyMjAsImV4cCI6MTcyNjE2MzgyMH0.oQZrNNp99jCJ3EW4APmvWztKrzmjaqRoXhqDyuh9CUQ
