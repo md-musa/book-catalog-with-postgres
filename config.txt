@@ -8,8 +8,41 @@ password: 123456
 
 => Deployment
 https://fb.watch/mUhYYR7Xy5/
+Database: https://supabase.com/dashboard/project/lwyywxowfspfspdvcfit/editor/28686
 
+==> SERVER: https://book-catalog-server-prisma.vercel.app/
 
 => Need to fix
 1. Add status to Order model (pending, shifted, delivered)
 2. Populate category book with category
+
+
+=> Supabase
+github
+pass: SJXw&Hx78Y%UN_p
+
+
+======> USER
+CUSTOMER----------------
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI4MjYxYzViZS1mM2Y4LTRjMjItOTA3Yi04ZGI4ZTQ3NjdhYTgiLCJyb2xlIjoiY3VzdG9tZXIiLCJpYXQiOjE2OTQ2MDYyMjAsImV4cCI6MTcyNjE2MzgyMH0.oQZrNNp99jCJ3EW4APmvWztKrzmjaqRoXhqDyuh9CUQ
+{
+  "name": "MD. Musa",
+  "email": "customer@gmail.com",
+  "password": "123456",
+  "role": "customer",
+  "contactNo": "1234567890",
+  "address": "Dhaka, Bangladesh",
+  "profileImg": "user.jpg"
+}
+
+ADMIN--------
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJlNWZkZmRkNC03Mzg0LTQxOGQtYmQ0Ni0zOTBjNTUwNmU1MjIiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2OTQ2MDYxNzMsImV4cCI6MTcyNjE2Mzc3M30.4DGBNE5U5ZTVMtFO3fZ9QBIrmX-zzh5a43rUg9ypxqg
+{
+  "name": "MD. Musa",
+  "email": "admin@gmail.com",
+  "password": "123456",
+  "role": "admin",
+  "contactNo": "1234567890",
+  "address": "Dhaka, Bangladesh",
+  "profileImg": "user.jpg"
+}

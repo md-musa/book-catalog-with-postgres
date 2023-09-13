@@ -10,8 +10,8 @@ import { OrderService } from './order.service';
 
 const createOrder = catchAsync(async (req: Request, res: Response) => {
   const data: Order = req.body;
-  data.userId = (req.user as JwtPayload).userId;
-  const result = await OrderService.createOrder(data);
+  const { userId } = req.user as JwtPayload;
+  const result = await OrderService.createOrder(userId, data);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,

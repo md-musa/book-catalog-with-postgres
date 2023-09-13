@@ -1,8 +1,13 @@
 import { Order } from '@prisma/client';
 import prisma from '../../../shared/prisma';
 
-const createOrder = async (payload: Order): Promise<Order> => {
-  const order = await prisma.order.create({ data: payload });
+const createOrder = async (userId: string, payload: any): Promise<Order> => {
+  const order = await prisma.order.create({
+    data: {
+      ...payload,
+      userId,
+    },
+  });
 
   return order;
 };
