@@ -7,11 +7,11 @@ import { BookValidation } from './book.validation';
 
 const router = express.Router();
 
-router.get('/', BookController.getBooks);
-router.get('/:categoryId/category', BookController.getBooksByCategoryId);
+router.get('/', BookController.getAllBooks);
+router.get('/:categoryId/category', BookController.getAllBooksByCategoryId);
 router.get('/:id', BookController.getSingleBook);
-router.patch('/:id', auth(USER_ROLE.ADMIN), validateRequest(BookValidation.update), BookController.updateBook);
-router.delete('/:id', auth(USER_ROLE.ADMIN), BookController.deleteBook);
+router.patch('/:id', auth(USER_ROLE.ADMIN), validateRequest(BookValidation.update), BookController.updateSingleBook);
+router.delete('/:id', auth(USER_ROLE.ADMIN), BookController.deleteSingleBook);
 router.post('/create-book', auth(USER_ROLE.ADMIN), validateRequest(BookValidation.create), BookController.createBook);
 
 export const BookRoute = router;

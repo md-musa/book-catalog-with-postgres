@@ -21,6 +21,9 @@ const getSingleUser = catchAsync(async (req: Request, res: Response): Promise<vo
   const { id } = req.params;
   const user = await UserService.getSingleUser(id);
 
+  if (!user) throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
+  const { password, ...otherInfo } = user;
+
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
@@ -34,11 +37,14 @@ const updateUser = catchAsync(async (req: Request, res: Response): Promise<void>
   const data = req.body;
   const updatedUserData = await UserService.updateUser(id, data);
 
+  if (!updatedUserData) throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
+  const { password, ...otherInfo } = updatedUserData;
+
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
     message: 'User updated successfully',
-    data: updatedUserData,
+    data: otherInfo,
   });
 });
 
@@ -46,11 +52,14 @@ const deleteUser = catchAsync(async (req: Request, res: Response): Promise<void>
   const { id } = req.params;
   const deletedUser = await UserService.deleteUser(id);
 
+  if (!deletedUser) throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
+  const { password, ...otherInfo } = deletedUser;
+
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
     message: 'User deleted successfully',
-    data: deletedUser,
+    data: otherInfo,
   });
 });
 
@@ -59,21 +68,19 @@ const getProfile = catchAsync(async (req: Request, res: Response): Promise<void>
 
   const user = await UserService.getProfile(userId);
 
+  if (!user) throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
+
   if (userId != user?.id) {
     throw new ApiError(httpStatus.UNAUTHORIZED, 'You are not authorized');
   }
-  sendResponse(res, {
-    statusCode: httpStatus.OK,
-    success: true,
-    message: 'Order fetched successfully',
-    data: user,
-  });
+
+  const { password, ...otherInfo } = user;
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
     message: 'User profile fetched successful',
-    data: user,
+    data: otherInfo,
   });
 });
 

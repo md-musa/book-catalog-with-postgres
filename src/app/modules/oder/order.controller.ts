@@ -1,6 +1,7 @@
 import { Order } from '@prisma/client';
 import { Request, Response } from 'express';
 import httpStatus from 'http-status';
+import { JwtPayload } from 'jsonwebtoken';
 import { USER_ROLE } from '../../../enums/user';
 import ApiError from '../../../errors/ApiError';
 import catchAsync from '../../../shared/catchAsync';
@@ -9,7 +10,7 @@ import { OrderService } from './order.service';
 
 const createOrder = catchAsync(async (req: Request, res: Response) => {
   const data: Order = req.body;
-  data.userId = req.user.userId;
+  data.userId = (req.user as JwtPayload).userId;
   const result = await OrderService.createOrder(data);
 
   sendResponse(res, {
@@ -24,7 +25,7 @@ const getSingleOrderById = catchAsync(async (req: Request, res: Response) => {
   const { orderId } = req.params;
   const order = await OrderService.getSingleOrderById(orderId);
 
-  const { role, userId } = req.user;
+  const { role, userId } = req.user as JwtPayload;
   if (role === USER_ROLE.CUSTOMER && order?.userId != userId) {
     throw new ApiError(httpStatus.UNAUTHORIZED, 'You are not authorized');
   }
@@ -37,7 +38,7 @@ const getSingleOrderById = catchAsync(async (req: Request, res: Response) => {
 });
 
 const getAllOrders = catchAsync(async (req: Request, res: Response) => {
-  const user = req.user;
+  const user = req.user as JwtPayload;
   let orders;
 
   if (user.role === USER_ROLE.ADMIN) {

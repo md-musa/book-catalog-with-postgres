@@ -31,26 +31,26 @@ const getSingleBook = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
-const getBooks = catchAsync(async (req: Request, res: Response) => {
+const getAllBooks = catchAsync(async (req: Request, res: Response) => {
   const filters = pick(req.query, ['search', 'minPrice', 'maxPrice', 'category']);
   const options = pick(req.query, ['page', 'size', 'sortBy', 'sortOrder']);
 
-  const result = await BookService.getBooks(filters, options);
+  const result = await BookService.getAllBooks(filters, options);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Books retrieve successfully',
+    message: 'Books fetched successfully',
     meta: result.meta,
     data: result.data,
   });
 });
 
-const getBooksByCategoryId = catchAsync(async (req: Request, res: Response) => {
+const getAllBooksByCategoryId = catchAsync(async (req: Request, res: Response) => {
   const { categoryId } = req.params;
   const options = pick(req.query, ['page', 'size', 'sortBy', 'sortOrder']);
 
-  const result = await BookService.getBooksByCategoryId(categoryId, options);
+  const result = await BookService.getAllBooksByCategoryId(categoryId, options);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -61,11 +61,11 @@ const getBooksByCategoryId = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
-const updateBook = catchAsync(async (req: Request, res: Response) => {
+const updateSingleBook = catchAsync(async (req: Request, res: Response) => {
   const { id } = req.params;
   const bookData = req.body;
 
-  const updatedBook = await BookService.updateBook(id, bookData);
+  const updatedBook = await BookService.updateSingleBook(id, bookData);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -75,10 +75,10 @@ const updateBook = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
-const deleteBook = catchAsync(async (req: Request, res: Response) => {
+const deleteSingleBook = catchAsync(async (req: Request, res: Response) => {
   const { id } = req.params;
 
-  const deletedBook = await BookService.deleteBook(id);
+  const deletedBook = await BookService.deleteSingleBook(id);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -91,8 +91,8 @@ const deleteBook = catchAsync(async (req: Request, res: Response) => {
 export const BookController = {
   createBook,
   getSingleBook,
-  updateBook,
-  deleteBook,
-  getBooksByCategoryId,
-  getBooks,
+  updateSingleBook,
+  deleteSingleBook,
+  getAllBooksByCategoryId,
+  getAllBooks,
 };

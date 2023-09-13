@@ -134,6 +134,21 @@
             "date": 1694343663130,
             "name": "D:\\Programming\\NLWD\\Assignments\\assignment-8\\logs\\winston\\errors\\phu-2023-10-09-17-error.log",
             "hash": "750d9aa0995992016ccc403ce22472afeaf2054605cf5c10899db02fd64dd023"
+        },
+        {
+            "date": 1694591880176,
+            "name": "D:\\Programming\\NLWD\\Assignments\\assignment-8\\logs\\winston\\errors\\phu-2023-13-09-13-error.log",
+            "hash": "718c9e545e24c70c03b0e40e5345ac5cac4e45128a410dd153adf8ff229c0533"
+        },
+        {
+            "date": 1694592470762,
+            "name": "D:\\Programming\\NLWD\\Assignments\\assignment-8\\logs\\winston\\errors\\phu-2023-13-09-14-error.log",
+            "hash": "cbd8b0061dc87b23b75cd33b2f338c04cfe9c4c23868d02c7ca441147e2fce28"
+        },
+        {
+            "date": 1694595681347,
+            "name": "D:\\Programming\\NLWD\\Assignments\\assignment-8\\logs\\winston\\errors\\phu-2023-13-09-15-error.log",
+            "hash": "d19125c01e369720cdb30f3db02dbf1baefbc01227cdc3cd470976fe82c29014"
         }
     ],
     "hashType": "sha256"

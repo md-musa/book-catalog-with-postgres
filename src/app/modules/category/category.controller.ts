@@ -34,7 +34,7 @@ const getSingleCategory = catchAsync(async (req: Request, res: Response): Promis
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Category retrieve successfully',
+    message: 'Category fetched successfully',
     data: category,
   });
 });

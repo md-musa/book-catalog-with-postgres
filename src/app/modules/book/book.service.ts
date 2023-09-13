@@ -17,7 +17,7 @@ const createBook = async (payload: Book): Promise<Book> => {
   return book;
 };
 
-const getBooks = async (filters: IFilters, options: IPaginationOptions): Promise<IGenericResponse<Book[]>> => {
+const getAllBooks = async (filters: IFilters, options: IPaginationOptions): Promise<IGenericResponse<Book[]>> => {
   const { sortBy, sortOrder } = options;
   const { page, size, skip } = paginationHelpers.calculatePagination(options);
   const { search, category, maxPrice, minPrice } = filters; //filter
@@ -99,7 +99,7 @@ const getSingleBook = async (id: string): Promise<Book | null> => {
   return book;
 };
 
-const getBooksByCategoryId = async (categoryId: string, options: IPaginationOptions): Promise<IGenericResponse<Book[]>> => {
+const getAllBooksByCategoryId = async (categoryId: string, options: IPaginationOptions): Promise<IGenericResponse<Book[]>> => {
   console.log(categoryId);
   const { page, size, skip } = paginationHelpers.calculatePagination(options);
 
@@ -122,7 +122,7 @@ const getBooksByCategoryId = async (categoryId: string, options: IPaginationOpti
   };
 };
 
-const updateBook = async (id: string, payload: Partial<Book>): Promise<Book> => {
+const updateSingleBook = async (id: string, payload: Partial<Book>): Promise<Book> => {
   const updatedBook = await prisma.book.update({
     where: { id },
     data: payload,
@@ -131,7 +131,7 @@ const updateBook = async (id: string, payload: Partial<Book>): Promise<Book> => 
   return updatedBook;
 };
 
-const deleteBook = async (id: string): Promise<Book | null> => {
+const deleteSingleBook = async (id: string): Promise<Book | null> => {
   const deletedBook = await prisma.book.delete({
     where: { id },
   });
@@ -141,9 +141,9 @@ const deleteBook = async (id: string): Promise<Book | null> => {
 
 export const BookService = {
   createBook,
-  getBooks,
+  getAllBooks,
   getSingleBook,
-  updateBook,
-  deleteBook,
-  getBooksByCategoryId,
+  updateSingleBook,
+  deleteSingleBook,
+  getAllBooksByCategoryId,
 };

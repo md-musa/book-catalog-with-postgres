@@ -5,23 +5,16 @@ import catchAsync from '../../../shared/catchAsync';
 import sendResponse from '../../../shared/sendResponse';
 import { AuthService } from './auth.service';
 
-//Task remaining
-// 1. Do not send password
-// 2. Send jwt
-
 const signup = catchAsync(async (req: Request, res: Response): Promise<void> => {
   const userData: User = req.body;
-  //accessToken, refreshToken,
 
-  const result = await AuthService.signup(userData);
-
-  // res.cookie('refreshToken', refreshToken);
+  const { password, ...otherInfo } = await AuthService.signup(userData);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
     message: 'User created successfully!',
-    data: result,
+    data: otherInfo,
   });
 });
 
@@ -30,14 +23,12 @@ const login = catchAsync(async (req: Request, res: Response): Promise<void> => {
 
   const token = await AuthService.login(userData);
 
-  const response = {
+  res.status(200).json({
     success: true,
     statusCode: 200,
     message: 'User signin successfully!',
     token: token,
-  };
-
-  res.status(200).json(response);
+  });
 });
 
 export const AuthController = {
