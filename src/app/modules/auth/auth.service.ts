@@ -46,21 +46,6 @@ const login = async (userData: IUser): Promise<string> => {
     config.JWT.ACCESS_TOKEN_EXPIRES_IN as string
   );
 
-  // user = await prisma.user.findUnique({
-  //   where: {
-  //     email,
-  //   },
-  //   select: {
-  //     id: true,
-  //     name: true,
-  //     email: true,
-  //     role: true,
-  //     contactNo: true,
-  //     address: true,
-  //     profileImg: true,
-  //   },
-  // });
-
   return accessToken;
 };
 

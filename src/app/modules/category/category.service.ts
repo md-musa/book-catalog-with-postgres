@@ -1,4 +1,6 @@
 import { Category, PrismaClient } from '@prisma/client';
+import httpStatus from 'http-status';
+import ApiError from '../../../errors/ApiError';
 
 const prisma = new PrismaClient();
 
@@ -27,6 +29,8 @@ const getSingleCategory = async (id: string): Promise<Category | null> => {
       books: true,
     },
   });
+
+  if (!category) throw new ApiError(httpStatus.BAD_REQUEST, 'Not found with the given id');
 
   return category;
 };

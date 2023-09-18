@@ -5,7 +5,7 @@ const create = z.object({
     .object({
       orderedBooks: z.array(
         z.object({
-          bookId: z.string(),
+          bookId: z.string().nonempty(),
           quantity: z.number().int().positive(),
         })
       ),

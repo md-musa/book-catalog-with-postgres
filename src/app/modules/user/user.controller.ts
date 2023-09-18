@@ -27,8 +27,8 @@ const getSingleUser = catchAsync(async (req: Request, res: Response): Promise<vo
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'User getched successfully',
-    data: user,
+    message: 'User fetched successfully',
+    data: otherInfo,
   });
 });
 
@@ -68,7 +68,7 @@ const getProfile = catchAsync(async (req: Request, res: Response): Promise<void>
 
   const user = await UserService.getProfile(userId);
 
-  if (!user) throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
+  if (!user?.id) throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
 
   if (userId != user?.id) {
     throw new ApiError(httpStatus.UNAUTHORIZED, 'You are not authorized');

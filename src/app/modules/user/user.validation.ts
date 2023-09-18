@@ -3,11 +3,11 @@ import { z } from 'zod';
 const update = z.object({
   body: z
     .object({
-      name: z.string().optional(),
-      email: z.string().optional(),
-      contactNo: z.string().optional(),
-      address: z.string().optional(),
-      profileImg: z.string().optional(),
+      name: z.string().nonempty().optional(),
+      email: z.string().nonempty().email().optional(),
+      contactNo: z.string().nonempty().optional(),
+      address: z.string().nonempty().optional(),
+      profileImg: z.string().nonempty().optional(),
     })
     .strict(),
 });

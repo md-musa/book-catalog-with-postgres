@@ -24,7 +24,7 @@ const getSingleBook = catchAsync(async (req: Request, res: Response) => {
   const book = await BookService.getSingleBook(id);
 
   sendResponse(res, {
-    statusCode: httpStatus.CREATED,
+    statusCode: httpStatus.OK,
     success: true,
     message: 'Book fetched successfully',
     data: book,

@@ -24,29 +24,29 @@ const getSingleUser = async (id: string): Promise<User | null> => {
       id,
     },
   });
-
   return user;
 };
 
 const updateUser = async (id: string, payload: Partial<User>): Promise<User | null> => {
-  const updatedUserData = await prisma.user.update({
+  const user = await prisma.user.update({
     where: {
       id,
     },
     data: payload,
   });
 
-  return updatedUserData;
+  return user;
 };
 
 const deleteUser = async (id: string): Promise<User> => {
-  const deletedUser = await prisma.user.delete({
+  console.log(id);
+  const user = await prisma.user.delete({
     where: {
       id,
     },
   });
 
-  return deletedUser;
+  return user;
 };
 
 const getProfile = async (id: string): Promise<User | null> => {

@@ -1,3 +1,4 @@
+import { Role } from '@prisma/client';
 import { z } from 'zod';
 
 const create = z.object({
@@ -14,7 +15,8 @@ const create = z.object({
       password: z.string({
         required_error: 'Password is required',
       }),
-      role: z.enum(['customer', 'admin']).default('customer'),
+
+      role: z.enum([...Object.values(Role)] as [string, ...string[]]).default(Role.customer),
       contactNo: z.string({
         required_error: 'contact number is required',
       }),

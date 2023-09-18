@@ -1,10 +1,19 @@
-=> CUSTOMER
-email: customer.musa@gmail.com
-password: 123456
+---------------------------------------
 
-=> ADMIN
-email: admin.musa@gmail.com
-password: 123456
+Github: https://github.com/md-musa/book-catalog-with-postgres
+Live-link: https://book-catalog-server-prisma.vercel.app/
+
+---------------------------------------
+         UPDATE
+1. yarn tsc
+2. vercel --prod  
+3. git push
+4. update readme file 
+
+Supabase: https://supabase.com/dashboard/project/lwyywxowfspfspdvcfit/editor/28700
+Assign. Github: https://github.com/Apollo-Level2-Web-Dev/l2-b1-assignment-8/blob/main/README.md
+--------------------------------------
+
 
 => Deployment
 https://fb.watch/mUhYYR7Xy5/
@@ -28,8 +37,7 @@ ISSUES
 
 ======> USER
 CUSTOMER----------------
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI4MjYxYzViZS1mM2Y4LTRjMjItOTA3Yi04ZGI4ZTQ3NjdhYTgiLCJyb2xlIjoiY3VzdG9tZXIiLCJpYXQiOjE2OTQ2MDYyMjAsImV4cCI6MTcyNjE2MzgyMH0.oQZrNNp99jCJ3EW4APmvWztKrzmjaqRoXhqDyuh9CUQ
-{
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5ODg5OWI2Yy1lYWNkLTQ2YTYtOTkwOS03NjM2ZTRmZGY0MDEiLCJyb2xlIjoiY3VzdG9tZXIiLCJpYXQiOjE2OTQ2MjE4MjgsImV4cCI6MTcyNjE3OTQyOH0.ZEpupBrZbVLiMvLeZSJcZRK6dxYPxXjfrWDtaPFtqF4{
   "name": "MD. Musa",
   "email": "customer@gmail.com",
   "password": "123456",
@@ -40,7 +48,7 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI4MjYxYzViZS1mM2Y4LTRjMjItOTA
 }
 
 ADMIN--------
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJlNWZkZmRkNC03Mzg0LTQxOGQtYmQ0Ni0zOTBjNTUwNmU1MjIiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2OTQ2MDYxNzMsImV4cCI6MTcyNjE2Mzc3M30.4DGBNE5U5ZTVMtFO3fZ9QBIrmX-zzh5a43rUg9ypxqg
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJlNWZkZmRkNC03Mzg0LTQxOGQtYmQ0Ni0zOTBjNTUwNmU1MjIiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2OTQ2MjE4ODQsImV4cCI6MTcyNjE3OTQ4NH0.HFIiyre1OrNcpy0N1WLMut4Gq2x2NmjKUStpjGA47yU
 {
   "name": "MD. Musa",
   "email": "admin@gmail.com",
@@ -50,3 +58,14 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJlNWZkZmRkNC03Mzg0LTQxOGQtYmQ
   "address": "Dhaka, Bangladesh",
   "profileImg": "user.jpg"
 }
+
+
+
+Assignement Reviews-------
+1. Error handling 
+2. Data updating, and deleting integrety
+3. 
+
+
+ 
+
